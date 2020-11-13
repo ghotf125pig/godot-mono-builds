@@ -145,7 +145,7 @@ def setup_ios_device_template(env: dict, opts: iOSOpts, target: str):
     	'--enable-dtrace=no',
     	'--enable-icall-export',
     	'--enable-maintainer-mode',
-    	'--enable-minimal=ssa,com,interpreter,jit,portability,assembly_remapping,attach,verifier,' +
+    	'--enable-minimal=ssa,com,jit,portability,assembly_remapping,attach,verifier,' +
                 'full_messages,appdomains,security,sgen_remset,sgen_marksweep_par,sgen_marksweep_fixed,' +
                 'sgen_marksweep_fixed_par,sgen_copying,logging,remoting,shared_perfcounters,gac',
     	'--enable-monotouch',
