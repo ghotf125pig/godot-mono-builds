@@ -30,7 +30,8 @@ def main(raw_args):
         'mono-dbg-agent-clear-tls-instead-of-abort.diff',
         'bcl-profile-platform-override.diff',
         'mono_ios_asl_log_deprecated.diff',
-        'mono-sys-uio-fix-preadv-misdetection.diff'
+        'mono-sys-uio-fix-preadv-misdetection.diff',
+        'mono_osx_threads_helper_unity.diff'
     ]
 
     if os.path.isfile(os.path.join(mono_source_root, 'mono/tools/offsets-tool/offsets-tool.py')):
