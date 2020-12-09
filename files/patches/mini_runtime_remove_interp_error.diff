@@ -1,8 +1,8 @@
 diff --git a/mono/mini/mini-runtime.c b/mono/mini/mini-runtime.c
-index bb1d105fb71..acefd55f642 100644
+index 3b44af7adff..1e34819d81e 100644
 --- a/mono/mini/mini-runtime.c
 +++ b/mono/mini/mini-runtime.c
-@@ -2432,10 +2432,12 @@ lookup_start:
+@@ -2437,10 +2437,12 @@ lookup_start:
  		}
  
  		if (mono_aot_only) {

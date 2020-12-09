@@ -1,8 +1,8 @@
 diff --git a/mono/mini/interp/transform.c b/mono/mini/interp/transform.c
-index c4ad519aad9..1c99e3e7542 100644
+index 7438255c6a1..e258ba01723 100644
 --- a/mono/mini/interp/transform.c
 +++ b/mono/mini/interp/transform.c
-@@ -863,8 +863,16 @@ jit_call_supported (MonoMethod *method, MonoMethodSignature *sig)
+@@ -739,8 +739,16 @@ mono_interp_jit_call_supported (MonoMethod *method, MonoMethodSignature *sig)
  	if (mono_aot_only && m_class_get_image (method->klass)->aot_module && !(method->iflags & METHOD_IMPL_ATTRIBUTE_SYNCHRONIZED)) {
  		ERROR_DECL (error);
  		gpointer addr = mono_jit_compile_method_jit_only (method, error);

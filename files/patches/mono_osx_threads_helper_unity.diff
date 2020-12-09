@@ -1,5 +1,5 @@
 diff --git a/mono/utils/mono-threads-mach-helper.c b/mono/utils/mono-threads-mach-helper.c
-index 975bfa90a04..5edbc8c59fd 100644
+index 7b4f140b619..10cdc3dc97d 100644
 --- a/mono/utils/mono-threads-mach-helper.c
 +++ b/mono/utils/mono-threads-mach-helper.c
 @@ -123,7 +123,7 @@ mono_threads_init_dead_letter (void)
