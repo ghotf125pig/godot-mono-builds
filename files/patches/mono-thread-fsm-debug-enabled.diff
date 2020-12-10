@@ -36,7 +36,7 @@ index 88cea36969b..85f9c547337 100644
  	if (!cookie)
  		return;
 diff --git a/mono/utils/mono-threads-debug.h b/mono/utils/mono-threads-debug.h
-index ded80a96f3a..3766f5f32c4 100644
+index ded80a96f3a..9b6a166cb8b 100644
 --- a/mono/utils/mono-threads-debug.h
 +++ b/mono/utils/mono-threads-debug.h
 @@ -33,7 +33,7 @@
@@ -44,7 +44,7 @@ index ded80a96f3a..3766f5f32c4 100644
  #endif
  
 -#if 1
-+#if defined(HOST_WASM) || defined(TARGET_WASM)
++#ifndef TARGET_OSX
  #define THREADS_STATE_MACHINE_DEBUG(...)
  #else
  #define THREADS_STATE_MACHINE_DEBUG_ENABLED
