@@ -1,5 +1,5 @@
 diff --git a/mono/utils/mono-threads-coop.c b/mono/utils/mono-threads-coop.c
-index 88cea36969b..5b356a7b330 100644
+index 88cea36969b..85f9c547337 100644
 --- a/mono/utils/mono-threads-coop.c
 +++ b/mono/utils/mono-threads-coop.c
 @@ -307,6 +307,7 @@ mono_threads_enter_gc_safe_region_unbalanced_with_info (MonoThreadInfo *info, Mo
@@ -14,7 +14,7 @@ index 88cea36969b..5b356a7b330 100644
  
  	const char *function_name = mono_stackdata_get_function_name (stackdata);
  
-+	THREADS_STATE_MACHINE_DEBUG ("exit gc safe %s\n", func);
++	THREADS_STATE_MACHINE_DEBUG ("exit gc safe %s\n", function_name);
 +
  	check_info (info, "exit", "safe", function_name);
  
