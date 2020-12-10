@@ -1,3 +1,40 @@
+diff --git a/mono/utils/mono-threads-coop.c b/mono/utils/mono-threads-coop.c
+index 88cea36969b..5b356a7b330 100644
+--- a/mono/utils/mono-threads-coop.c
++++ b/mono/utils/mono-threads-coop.c
+@@ -307,6 +307,7 @@ mono_threads_enter_gc_safe_region_unbalanced_with_info (MonoThreadInfo *info, Mo
+ 	++coop_do_blocking_count;
+ 
+ 	const char *function_name = mono_stackdata_get_function_name (stackdata);
++	THREADS_STATE_MACHINE_DEBUG ("enter gc safe %s\n", function_name);
+ 
+ 	check_info (info, "enter", "safe", function_name);
+ 
+@@ -373,6 +374,8 @@ mono_threads_exit_gc_safe_region_unbalanced_internal (gpointer cookie, MonoStack
+ 
+ 	const char *function_name = mono_stackdata_get_function_name (stackdata);
+ 
++	THREADS_STATE_MACHINE_DEBUG ("exit gc safe %s\n", func);
++
+ 	check_info (info, "exit", "safe", function_name);
+ 
+ 	switch (mono_threads_transition_done_blocking (info, function_name)) {
+@@ -472,6 +475,7 @@ mono_threads_enter_gc_unsafe_region_unbalanced_with_info (MonoThreadInfo *info,
+ 	++coop_reset_blocking_count;
+ 
+ 	const char *function_name = mono_stackdata_get_function_name (stackdata);
++	THREADS_STATE_MACHINE_DEBUG ("enter gc unsafe %s\n", function_name);
+ 
+ 	check_info (info, "enter", "unsafe", function_name);
+ 
+@@ -556,6 +560,7 @@ mono_threads_exit_gc_unsafe_region_unbalanced_internal (gpointer cookie, MonoSta
+ {
+ 	if (!mono_threads_is_blocking_transition_enabled ())
+ 		return;
++	THREADS_STATE_MACHINE_DEBUG ("exit gc unsafe %s\n");
+ 
+ 	if (!cookie)
+ 		return;
 diff --git a/mono/utils/mono-threads-debug.h b/mono/utils/mono-threads-debug.h
 index ded80a96f3a..3207a3dfd9e 100644
 --- a/mono/utils/mono-threads-debug.h
