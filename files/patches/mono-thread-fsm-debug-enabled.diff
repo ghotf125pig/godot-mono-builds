@@ -1,0 +1,13 @@
+diff --git a/mono/utils/mono-threads-debug.h b/mono/utils/mono-threads-debug.h
+index ded80a96f3a..3207a3dfd9e 100644
+--- a/mono/utils/mono-threads-debug.h
++++ b/mono/utils/mono-threads-debug.h
+@@ -33,7 +33,7 @@
+ #define THREADS_SUSPEND_DEBUG MOSTLY_ASYNC_SAFE_PRINTF
+ #endif
+ 
+-#if 1
++#if 0
+ #define THREADS_STATE_MACHINE_DEBUG(...)
+ #else
+ #define THREADS_STATE_MACHINE_DEBUG_ENABLED
