@@ -11,3 +11,52 @@ index ded80a96f3a..3207a3dfd9e 100644
  #define THREADS_STATE_MACHINE_DEBUG(...)
  #else
  #define THREADS_STATE_MACHINE_DEBUG_ENABLED
+diff --git a/mono/utils/mono-threads-state-machine.c b/mono/utils/mono-threads-state-machine.c
+index f1146f5a634..daf81fdcd80 100644
+--- a/mono/utils/mono-threads-state-machine.c
++++ b/mono/utils/mono-threads-state-machine.c
+@@ -723,7 +723,7 @@ mono_threads_transition_do_blocking (MonoThreadInfo* info, const char *func)
+ {
+ 	int raw_state, cur_state, suspend_count;
+ 	gboolean no_safepoints;
+-
++	THREADS_STATE_MACHINE_DEBUG ("DO BLOCK at %s\n", func);
+ retry_state_change:
+ 	UNWRAP_THREAD_STATE (raw_state, cur_state, suspend_count, no_safepoints, info);
+ 	switch (cur_state) {
+@@ -735,7 +735,7 @@ retry_state_change:
+ 			mono_fatal_with_history ("no_safepoints = TRUE, but should be FALSE in state RUNNING with DO_BLOCKING");
+ 		if (thread_state_cas (&info->thread_state, build_thread_state (STATE_BLOCKING, suspend_count, no_safepoints), raw_state) != raw_state)
+ 			goto retry_state_change;
+-		trace_state_change ("DO_BLOCKING", info, raw_state, STATE_BLOCKING, no_safepoints, 0);
++		trace_state_change_with_func ("DO_BLOCKING", info, raw_state, STATE_BLOCKING, no_safepoints, 0, func);
+ 		return DoBlockingContinue;
+ 
+ 	case STATE_ASYNC_SUSPEND_REQUESTED:
+@@ -743,7 +743,7 @@ retry_state_change:
+ 			mono_fatal_with_history ("suspend_count = %d, but should be > 0", suspend_count);
+ 		if (no_safepoints)
+ 			mono_fatal_with_history ("no_safepoints = TRUE, but should be FALSE in state ASYNC_SUSPEND_REQUESTED with DO_BLOCKING");
+-		trace_state_change ("DO_BLOCKING", info, raw_state, cur_state, no_safepoints, 0);
++		trace_state_change_with_func ("DO_BLOCKING", info, raw_state, cur_state, no_safepoints, 0, func);
+ 		return DoBlockingPollAndRetry;
+ /*
+ STATE_ASYNC_SUSPENDED
+@@ -771,7 +771,7 @@ mono_threads_transition_done_blocking (MonoThreadInfo* info, const char *func)
+ {
+ 	int raw_state, cur_state, suspend_count;
+ 	gboolean no_safepoints;
+-
++	THREADS_STATE_MACHINE_DEBUG ("DONE BLOCK at %s\n", func);
+ retry_state_change:
+ 	UNWRAP_THREAD_STATE (raw_state, cur_state, suspend_count, no_safepoints, info);
+ 	switch (cur_state) {
+@@ -822,7 +822,7 @@ mono_threads_transition_abort_blocking (THREAD_INFO_TYPE* info, const char *func
+ {
+ 	int raw_state, cur_state, suspend_count;
+ 	gboolean no_safepoints;
+-
++	THREADS_STATE_MACHINE_DEBUG ("ABORT BLOCK at %s\n", func);
+ retry_state_change:
+ 	UNWRAP_THREAD_STATE (raw_state, cur_state, suspend_count, no_safepoints, info);
+ 	switch (cur_state) {
