@@ -1,0 +1,19 @@
+diff --git a/mono/metadata/object.c b/mono/metadata/object.c
+index a69ff1083a9..52d8f44435c 100644
+--- a/mono/metadata/object.c
++++ b/mono/metadata/object.c
+@@ -372,6 +372,14 @@ mono_runtime_class_init (MonoVTable *vtable)
+ 	mono_error_assert_ok (error);
+ }
+ 
++void
++mono_runtime_class_init_embed (MonoVTable *vtable)
++{
++	MONO_ENTER_GC_UNSAFE;
++	mono_runtime_class_init(vtable);
++	MONO_EXIT_GC_UNSAFE;
++}
++
+ /*
+  * Returns TRUE if the lock was freed.
+  * LOCKING: Caller should hold type_initialization_lock.
