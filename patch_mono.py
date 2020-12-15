@@ -34,7 +34,6 @@ def main(raw_args):
         'mono_osx_threads_helper_unity.diff',
         'mini_runtime_remove_interp_error.diff',
         'mono_transform_error_leak.diff',
-        'mono-runtime-class-init-embed.dff',
     ]
 
     if os.path.isfile(os.path.join(mono_source_root, 'mono/tools/offsets-tool/offsets-tool.py')):
