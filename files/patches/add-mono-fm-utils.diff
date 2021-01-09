@@ -1,3 +1,17 @@
+diff --git a/mono/metadata/Makefile.am b/mono/metadata/Makefile.am
+index dc9cf2a4d25..f53ab1510ae 100644
+--- a/mono/metadata/Makefile.am
++++ b/mono/metadata/Makefile.am
+@@ -465,7 +465,8 @@ libmonoruntimeinclude_HEADERS = \
+ 	sgen-bridge.h		\
+ 	threads.h		\
+ 	tokentype.h		\
+-	verify.h		
++	verify.h	\
++	fm-utils.h	
+ 
+ if !ENABLE_MSVC_ONLY
+ 
 diff --git a/mono/metadata/fm-utils.c b/mono/metadata/fm-utils.c
 new file mode 100644
 index 00000000000..75919b672cc
