@@ -1,0 +1,38 @@
+diff --git a/mono/metadata/fm-utils.c b/mono/metadata/fm-utils.c
+new file mode 100644
+index 00000000000..75919b672cc
+--- /dev/null
++++ b/mono/metadata/fm-utils.c
+@@ -0,0 +1,14 @@
++#include <config.h>
++#include <mono/metadata/object.h>
++#include <mono/metadata/object-internals.h>
++
++
++MonoObject* mono_fm_delegate_get_target(MonoDelegate *delegate)
++{
++    return delegate->target;
++}
++
++MonoObject* mono_fm_delegate_get_hash(MonoDelegate *delegate)
++{
++    return delegate->delegate_trampoline;
++}
+\ No newline at end of file
+diff --git a/mono/metadata/fm-utils.h b/mono/metadata/fm-utils.h
+new file mode 100644
+index 00000000000..d5e3b0472e6
+--- /dev/null
++++ b/mono/metadata/fm-utils.h
+@@ -0,0 +1,10 @@
++#ifndef __FM_MONO_UTILS_H
++#define __FM_MONO_UTILS_H
++
++#include <mono/metadata/object.h>
++
++
++MonoObject* mono_fm_delegate_get_target(MonoDelegate *delegate);
++MonoObject* mono_fm_delegate_get_hash(MonoDelegate *delegate);
++
++#endif
+\ No newline at end of file
