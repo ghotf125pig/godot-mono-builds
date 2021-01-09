@@ -1,8 +1,18 @@
 diff --git a/mono/metadata/Makefile.am b/mono/metadata/Makefile.am
-index dc9cf2a4d25..f53ab1510ae 100644
+index dc9cf2a4d25..5cff6ce4cef 100644
 --- a/mono/metadata/Makefile.am
 +++ b/mono/metadata/Makefile.am
-@@ -465,7 +465,8 @@ libmonoruntimeinclude_HEADERS = \
+@@ -387,7 +387,8 @@ common_sources = \
+ 	callspec.h	\
+ 	callspec.c	\
+ 	abi.c	\
+-	native-library.c
++	native-library.c \
++	fm-utils.c
+ 
+ # These source files have compile time dependencies on GC code
+ gc_dependent_sources = \
+@@ -465,7 +466,8 @@ libmonoruntimeinclude_HEADERS = \
  	sgen-bridge.h		\
  	threads.h		\
  	tokentype.h		\
@@ -50,3 +60,18 @@ index 00000000000..d5e3b0472e6
 +
 +#endif
 \ No newline at end of file
+diff --git a/mono/mini/CMakeLists.txt b/mono/mini/CMakeLists.txt
+index 960b4d8d861..5b052ba6a0a 100644
+--- a/mono/mini/CMakeLists.txt
++++ b/mono/mini/CMakeLists.txt
+@@ -494,7 +494,9 @@ set(metadata_common_sources
+ 	method-builder-ilgen.h
+ 	method-builder-ilgen.c
+ 	marshal-ilgen.h
+-	marshal-ilgen.c)
++	marshal-ilgen.c
++	fm-utils.h
++	fm-utils.c)
+ 
+ set (metadata_gc_dependent_sources
+      gc-stats.c
