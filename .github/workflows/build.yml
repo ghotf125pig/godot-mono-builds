@@ -26,15 +26,18 @@ on:
 # Use ubuntu-latest for the WASM runtime ("machine `wasm32' not recognized" on ubuntu-16.04)
 
 env:
-  # Use SHA instead of the branch for caching purposes
-  MONO_TAG: mono-6.12.0.112
+  # Use SHA or tag instead of the branch for caching purposes.
+  MONO_TAG: mono-6.12.0.114
   PYTHON_VERSION: 3.8
+  # Should match the version that Mono supports.
   EMSDK_VERSION: 1.39.9
+  ANDROID_CMAKE_VERSION: 3.10.2.4988404
+  # These should be synced with the Godot repo.
+  # platform/android/java/app/config.gradle
   ANDROID_PLATFORM: android-29
-  ANDROID_CMAKE_VERSION: 3.6.4111459
-  ANDROID_API: 21
+  ANDROID_API: 18
+  # platform/iphone/detect.py
   IOS_VERSION_MIN: 10.0
-  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
   linux:
@@ -61,7 +64,7 @@ jobs:
           sudo apt-get -y install git autoconf libtool libtool-bin automake build-essential gettext cmake python3 curl
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -135,7 +138,7 @@ jobs:
           sudo apt-get -y install mingw-w64 libz-mingw-w64-dev
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -199,7 +202,7 @@ jobs:
           brew install autoconf automake libtool pkg-config cmake python3
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -263,7 +266,7 @@ jobs:
           brew install autoconf automake libtool pkg-config cmake python3
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -333,7 +336,7 @@ jobs:
           brew install autoconf automake libtool pkg-config cmake python3
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -431,7 +434,7 @@ jobs:
           echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk-bundle" >> $GITHUB_ENV
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -561,7 +564,7 @@ jobs:
           echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk-bundle" >> $GITHUB_ENV
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -648,7 +651,7 @@ jobs:
           sudo apt-get -y install git autoconf libtool libtool-bin automake build-essential gettext cmake python3 curl
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -721,7 +724,7 @@ jobs:
     steps:
       - name: Cache LLVM
         id: cache_llvm
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ~/mono-installs/llvm-${{ matrix.target }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-llvm-${{ matrix.target }}
@@ -744,7 +747,7 @@ jobs:
       - name: Cache Mono Sources
         if: steps.cache_llvm.outputs.cache-hit != 'true'
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
@@ -808,7 +811,7 @@ jobs:
           sudo apt-get -y install git autoconf libtool libtool-bin automake build-essential gettext cmake python3 curl
       - name: Cache Mono Sources
         id: cache_mono_sources
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v1.2.0
         with:
           path: ${{ env.MONO_SOURCE_ROOT }}
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources

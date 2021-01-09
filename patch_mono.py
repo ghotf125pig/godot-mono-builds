@@ -30,7 +30,7 @@ def main(raw_args):
         'mono-dbg-agent-clear-tls-instead-of-abort.diff',
         'bcl-profile-platform-override.diff',
         'mono_ios_asl_log_deprecated.diff',
-        'mono-sys-uio-fix-preadv-misdetection.diff',
+        'wasm_m2n_trampolines_hook.diff',
         'mono_osx_threads_helper_unity.diff',
         'mini_runtime_remove_interp_error.diff',
         'mono_transform_error_leak.diff',
