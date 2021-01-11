@@ -35,7 +35,6 @@ def main(raw_args):
         'mini_runtime_remove_interp_error.diff',
         'mono_transform_error_leak.diff',
         'add-mono-fm-utils.diff',
-        'mono-dl-windows-add-log.diff',
     ]
 
     if os.path.isfile(os.path.join(mono_source_root, 'mono/tools/offsets-tool/offsets-tool.py')):
