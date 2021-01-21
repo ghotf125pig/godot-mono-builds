@@ -427,6 +427,7 @@ jobs:
       - name: Install Android SDK Manager
         run: |
           sudo snap install androidsdk
+          yes | androidsdk --licenses
           androidsdk "platforms;${ANDROID_PLATFORM}"
           androidsdk "ndk;19.0.5232133"
           androidsdk "cmake;${ANDROID_CMAKE_VERSION}"
@@ -557,6 +558,7 @@ jobs:
         run: |
           sudo apt-get -y install snapd
           sudo snap install androidsdk
+          yes | androidsdk --licenses
           androidsdk "platforms;${ANDROID_PLATFORM}"
           androidsdk "ndk;19.0.5232133"
           androidsdk "cmake;${ANDROID_CMAKE_VERSION}"
