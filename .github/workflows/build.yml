@@ -432,7 +432,7 @@ jobs:
           androidsdk "ndk;19.0.5232133"
           androidsdk "cmake;${ANDROID_CMAKE_VERSION}"
           echo "ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/" >> $GITHUB_ENV
-          echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/19.0.5232133" >> $GITHUB_ENV
+          echo "ANDROID_NDK_ROOT=$HOME/snap/androidsdk/current/ndk/19.0.5232133" >> $GITHUB_ENV
       - name: Cache Mono Sources
         id: cache_mono_sources
         uses: actions/cache@v1.2.0
@@ -563,7 +563,7 @@ jobs:
           androidsdk "ndk;19.0.5232133"
           androidsdk "cmake;${ANDROID_CMAKE_VERSION}"
           echo "ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/" >> $GITHUB_ENV
-          echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/19.0.5232133" >> $GITHUB_ENV
+          echo "ANDROID_NDK_ROOT=$HOME/snap/androidsdk/current/ndk/19.0.5232133" >> $GITHUB_ENV
       - name: Cache Mono Sources
         id: cache_mono_sources
         uses: actions/cache@v1.2.0
