@@ -327,7 +327,7 @@ def setup_android_cross_template(env: dict, opts: AndroidOpts, target: str, host
 
     CXXFLAGS = []
     CXXFLAGS += ['-DDEBUG_CROSS'] if not opts.release else []
-    CXXFLAGS += ['-mmacosx-version-min=10.9', '-stdlib=libc++'] if is_darwin else []
+    CXXFLAGS += ['-mmacosx-version-min=10.9', '-stdlib=libc++', '-std=gnu++11'] if is_darwin else []
 
     env['_android-%s_CXXFLAGS' % target] = CXXFLAGS
 
