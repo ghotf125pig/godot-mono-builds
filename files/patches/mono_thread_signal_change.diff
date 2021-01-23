@@ -1,0 +1,31 @@
+diff --git a/mono/utils/mono-threads-posix-signals.c b/mono/utils/mono-threads-posix-signals.c
+index 1e1c4718df7..71cedf25294 100644
+--- a/mono/utils/mono-threads-posix-signals.c
++++ b/mono/utils/mono-threads-posix-signals.c
+@@ -69,7 +69,7 @@ static int
+ abort_signal_get (void)
+ {
+ #if defined(HOST_ANDROID)
+-	return SIGTTIN;
++	return SIGTTOU;
+ #elif defined (__OpenBSD__)
+ 	return SIGUSR1;
+ #elif defined (SIGRTMIN)
+@@ -88,7 +88,7 @@ static int
+ suspend_signal_get (void)
+ {
+ #if defined(HOST_ANDROID)
+-	return SIGPWR;
++	return SIGWINCH;
+ #elif defined (SIGRTMIN)
+ 	static int suspend_signum = -1;
+ 	if (suspend_signum == -1)
+@@ -107,7 +107,7 @@ static int
+ restart_signal_get (void)
+ {
+ #if defined(HOST_ANDROID)
+-	return SIGXCPU;
++	return SIGXFSZ;
+ #elif defined (SIGRTMIN)
+ 	static int restart_signum = -1;
+ 	if (restart_signum == -1)
