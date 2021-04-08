@@ -1,5 +1,5 @@
 diff --git a/mono/mini/mini-runtime.c b/mono/mini/mini-runtime.c
-index 3b44af7adff..1e34819d81e 100644
+index 3b44af7adff..ca90049659c 100644
 --- a/mono/mini/mini-runtime.c
 +++ b/mono/mini/mini-runtime.c
 @@ -2437,10 +2437,12 @@ lookup_start:
@@ -19,3 +19,19 @@ index 3b44af7adff..1e34819d81e 100644
  			return NULL;
  		}
  
+@@ -3054,12 +3056,13 @@ mono_jit_runtime_invoke (MonoMethod *method, void *obj, void **params, MonoObjec
+ 		if (callee) {
+ 			compiled_method = mono_jit_compile_method_jit_only (callee, error);
+ 			if (!compiled_method) {
+-				g_assert (!is_ok (error));
+-
+ 				if (mono_use_interpreter)
+ 					use_interp = TRUE;
+ 				else
++				{
++					g_assert (!is_ok (error));
+ 					return NULL;
++				}
+ 			} else {
+ 				if (mono_llvm_only) {
+ 					ji = mini_jit_info_table_find (mono_domain_get (), (char *)mono_get_addr_from_ftnptr (compiled_method), NULL);
