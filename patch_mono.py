@@ -33,7 +33,6 @@ def main(raw_args):
         'wasm_m2n_trampolines_hook.diff',
         'mono_osx_threads_helper_unity.diff',
         'mini_runtime_remove_interp_error.diff',
-        'mono_transform_error_leak.diff',
         'add-mono-fm-utils.diff',
         'mono_thread_signal_change.diff',
     ]
