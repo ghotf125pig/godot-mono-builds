@@ -24,14 +24,15 @@ index dc9cf2a4d25..5cff6ce4cef 100644
  
 diff --git a/mono/metadata/fm-utils.c b/mono/metadata/fm-utils.c
 new file mode 100644
-index 00000000000..2ecb9abd6ad
+index 00000000000..8e46151223a
 --- /dev/null
 +++ b/mono/metadata/fm-utils.c
-@@ -0,0 +1,25 @@
+@@ -0,0 +1,33 @@
 +#include <config.h>
 +#include <mono/metadata/object.h>
 +#include <mono/metadata/object-internals.h>
 +#include <mono/metadata/fm-utils.h>
++#include <mono/mini/mini-runtime.h>
 +
 +
 +MONO_API MonoObject* mono_fm_delegate_get_target(MonoDelegate *delegate)
@@ -51,6 +52,13 @@ index 00000000000..2ecb9abd6ad
 +
 +MONO_API void* mono_fm_delegate_get_invoke_impl(MonoDelegate *delegate)
 +{
++    if (mono_use_interpreter)
++    {
++        if (delegate->interp_invoke_impl)
++        {
++            return delegate->interp_invoke_impl;
++        }
++    }
 +    return delegate->invoke_impl;
 +}
 \ No newline at end of file
