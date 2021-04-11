@@ -24,10 +24,10 @@ index dc9cf2a4d25..5cff6ce4cef 100644
  
 diff --git a/mono/metadata/fm-utils.c b/mono/metadata/fm-utils.c
 new file mode 100644
-index 00000000000..2ecb9abd6ad
+index 00000000000..8ec14576d25
 --- /dev/null
 +++ b/mono/metadata/fm-utils.c
-@@ -0,0 +1,25 @@
+@@ -0,0 +1,30 @@
 +#include <config.h>
 +#include <mono/metadata/object.h>
 +#include <mono/metadata/object-internals.h>
@@ -53,13 +53,18 @@ index 00000000000..2ecb9abd6ad
 +{
 +    return delegate->invoke_impl;
 +}
++
++MONO_API MonoMethod* mono_fm_reflection_method_get_method(MonoReflectionMethod * r_method)
++{
++    return r_method->method;
++}
 \ No newline at end of file
 diff --git a/mono/metadata/fm-utils.h b/mono/metadata/fm-utils.h
 new file mode 100644
-index 00000000000..3fc74aaaafe
+index 00000000000..e1ad2fa8611
 --- /dev/null
 +++ b/mono/metadata/fm-utils.h
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,14 @@
 +#ifndef __FM_MONO_UTILS_H
 +#define __FM_MONO_UTILS_H
 +
@@ -70,7 +75,8 @@ index 00000000000..3fc74aaaafe
 +MONO_API MonoObject* mono_fm_delegate_get_target(MonoDelegate *delegate);
 +MONO_API void* mono_fm_delegate_get_dele_trampoline(MonoDelegate *delegate);
 +MONO_API void* mono_fm_delegate_get_method_ptr(MonoDelegate *delegate);
-+MONO_API void* mono_fm_delegate_get_invoke_impl(MonoDelegate *delegate, mono_bool use_interpreter);
++MONO_API void* mono_fm_delegate_get_invoke_impl(MonoDelegate *delegate);
++MONO_API MonoMethod* mono_fm_reflection_method_get_method(MonoReflectionMethod * r_method);
 +
 +#endif
 \ No newline at end of file
