@@ -24,10 +24,10 @@ index dc9cf2a4d25..5cff6ce4cef 100644
  
 diff --git a/mono/metadata/fm-utils.c b/mono/metadata/fm-utils.c
 new file mode 100644
-index 00000000000..5bf3b12caa0
+index 00000000000..2ecb9abd6ad
 --- /dev/null
 +++ b/mono/metadata/fm-utils.c
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,25 @@
 +#include <config.h>
 +#include <mono/metadata/object.h>
 +#include <mono/metadata/object-internals.h>
@@ -49,15 +49,8 @@ index 00000000000..5bf3b12caa0
 +    return delegate->method_ptr;
 +}
 +
-+MONO_API void* mono_fm_delegate_get_invoke_impl(MonoDelegate *delegate, mono_bool use_interpreter)
++MONO_API void* mono_fm_delegate_get_invoke_impl(MonoDelegate *delegate)
 +{
-+    if (use_interpreter)
-+    {
-+        if (delegate->interp_invoke_impl)
-+        {
-+            return delegate->interp_invoke_impl;
-+        }
-+    }
 +    return delegate->invoke_impl;
 +}
 \ No newline at end of file
