@@ -1,10 +1,12 @@
 diff --git a/mono/metadata/image.c b/mono/metadata/image.c
-index b2ee484acdd..7f67c1efb13 100644
+index b2ee484acdd..216aa2bbf5e 100644
 --- a/mono/metadata/image.c
 +++ b/mono/metadata/image.c
-@@ -2363,10 +2363,21 @@ mono_image_close_except_pools (MonoImage *image)
+@@ -2362,15 +2362,28 @@ mono_image_close_except_pools (MonoImage *image)
+ 	 * assemblies, so we can't release these references in mono_assembly_close () since the
  	 * MonoImage might outlive its associated MonoAssembly.
  	 */
++	mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Image %s reference is: %p", image->name, image->references);
  	if (image->references && !image_is_dynamic (image)) {
 +		mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Start unload reference images, count %d.", image->nreferences);
  		for (i = 0; i < image->nreferences; i++) {
@@ -24,3 +26,16 @@ index b2ee484acdd..7f67c1efb13 100644
  			}
  		}
  	} else {
+ 		if (image->references) {
++			mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Free image %s reference in mono_image_close_except_pools", image->name);
+ 			g_free (image->references);
+ 			image->references = NULL;
+ 		}
+@@ -2520,6 +2533,7 @@ mono_image_close_finish (MonoImage *image)
+ 				mono_assembly_close_finish (image->references [i]);
+ 		}
+ 
++		mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Free image %s reference in mono_image_close_finish", image->name);
+ 		g_free (image->references);
+ 		image->references = NULL;
+ 	}
