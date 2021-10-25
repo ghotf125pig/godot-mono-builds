@@ -1,0 +1,26 @@
+diff --git a/mono/metadata/image.c b/mono/metadata/image.c
+index b2ee484acdd..7f67c1efb13 100644
+--- a/mono/metadata/image.c
++++ b/mono/metadata/image.c
+@@ -2363,10 +2363,21 @@ mono_image_close_except_pools (MonoImage *image)
+ 	 * MonoImage might outlive its associated MonoAssembly.
+ 	 */
+ 	if (image->references && !image_is_dynamic (image)) {
++		mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Start unload reference images, count %d.", image->nreferences);
+ 		for (i = 0; i < image->nreferences; i++) {
+ 			if (image->references [i] && image->references [i] != REFERENCE_MISSING) {
++				mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Unloading reference assembly %s.", image->references [i]->aname.name);
++				int leftRefCount = 0;
+ 				if (!mono_assembly_close_except_image_pools (image->references [i]))
++				{
++					leftRefCount = image->references[i]->ref_count;
+ 					image->references [i] = NULL;
++				}
++				else
++				{
++					leftRefCount = image->references[i]->ref_count;
++				}
++				mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Unloading reference assembly finish, ref count %d", leftRefCount);
+ 			}
+ 		}
+ 	} else {

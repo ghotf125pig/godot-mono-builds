@@ -36,6 +36,7 @@ def main(raw_args):
         'mono_transform_error_leak.diff',
         'add-mono-fm-utils.diff',
         'mono_thread_signal_change.diff',
+        'log-mono-image-ref-unload.diff',
     ]
 
     if os.path.isfile(os.path.join(mono_source_root, 'mono/tools/offsets-tool/offsets-tool.py')):
