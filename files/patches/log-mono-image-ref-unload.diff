@@ -1,8 +1,17 @@
 diff --git a/mono/metadata/image.c b/mono/metadata/image.c
-index b2ee484acdd..216aa2bbf5e 100644
+index b2ee484acdd..218dc3ca3cc 100644
 --- a/mono/metadata/image.c
 +++ b/mono/metadata/image.c
-@@ -2362,15 +2362,28 @@ mono_image_close_except_pools (MonoImage *image)
+@@ -1471,6 +1471,8 @@ mono_image_storage_dtor (gpointer self)
+ {
+ 	MonoImageStorage *storage = (MonoImageStorage *)self;
+ 
++	mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Destructor %s", storage->key);
++
+ 	mono_image_storage_unpublish (storage);
+ 	
+ #ifdef HOST_WIN32
+@@ -2362,15 +2364,28 @@ mono_image_close_except_pools (MonoImage *image)
  	 * assemblies, so we can't release these references in mono_assembly_close () since the
  	 * MonoImage might outlive its associated MonoAssembly.
  	 */
@@ -31,7 +40,18 @@ index b2ee484acdd..216aa2bbf5e 100644
  			g_free (image->references);
  			image->references = NULL;
  		}
-@@ -2520,6 +2533,7 @@ mono_image_close_finish (MonoImage *image)
+@@ -2396,7 +2411,10 @@ mono_image_close_except_pools (MonoImage *image)
+ 	}
+ 
+ 	if (image->storage)
++	{
++		mono_trace (G_LOG_LEVEL_INFO, MONO_TRACE_ASSEMBLY, "Image %s storage ref_count: %d", image->name, image->storage->ref.ref);
+ 		mono_image_storage_close (image->storage);
++	}
+ 
+ 	if (debug_assembly_unload) {
+ 		char *old_name = image->name;
+@@ -2520,6 +2538,7 @@ mono_image_close_finish (MonoImage *image)
  				mono_assembly_close_finish (image->references [i]);
  		}
  
