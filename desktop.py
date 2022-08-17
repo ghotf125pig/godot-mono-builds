@@ -15,7 +15,7 @@ import runtime
 targets = {
     'linux': ['x86', 'x86_64'],
     'windows': ['x86', 'x86_64'],
-    'osx': ['x86_64']
+    'osx': ['arm64', 'x86_64']
 }
 
 target_arch = {
@@ -28,14 +28,24 @@ target_arch = {
         'x86_64': 'x86_64'
     },
     'osx': {
+        'arm64': 'arm64',
         'x86_64': 'x86_64'
     }
 }
 
 host_triples = {
-    'linux': '%s-linux-gnu',
-    'windows': '%s-w64-mingw32',
-    'osx': '%s-apple-darwin',
+    'linux': {
+        'x86': 'i686-linux-gnu',
+        'x86_64': 'x86_64-linux-gnu'
+    },
+    'windows': {
+        'x86': 'i686-w64-mingw32',
+        'x86_64': 'x86_64-w64-mingw32'
+    },
+    'osx': {
+        'arm64': 'aarch64-apple-darwin20',
+        'x86_64': 'x86_64-apple-darwin'
+    }
 }
 
 llvm_table = {
@@ -70,25 +80,26 @@ def get_osxcross_sdk(osxcross_bin, arch):
 
 
 def setup_desktop_template(env: dict, opts: DesktopOpts, product: str, target_platform: str, target: str):
-    host_triple = host_triples[target_platform] % target_arch[target_platform][target]
+    host_triple = host_triples[target_platform][target]
 
     CONFIGURE_FLAGS = [
         '--disable-boehm',
         '--disable-mcs-build',
         '--enable-maintainer-mode',
         '--with-tls=pthread',
-        '--without-ikvm-native'
+        '--without-ikvm-native',
+        '--enable-btls',
     ]
 
     if target_platform == 'windows':
         CONFIGURE_FLAGS += [
-            '--with-libgdiplus=%s' % opts.mxe_prefix
+            '--with-libgdiplus=%s' % opts.mxe_prefix,
+            '--enable-btls-lib',
         ]
     else:
         CONFIGURE_FLAGS += [
             '--disable-iconv',
             '--disable-nls',
-            '--enable-dynamic-btls',
             '--with-sigaltstack=yes',
         ]
 
@@ -137,7 +148,20 @@ def setup_desktop_template(env: dict, opts: DesktopOpts, product: str, target_pl
             # DTrace is not available when building with OSXCROSS
             CONFIGURE_FLAGS += ['--enable-dtrace=no']
         else:
-            env['_%s-%s_CC' % (product, target)] = 'cc'
+            osx_toolchain = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain'
+
+            env['_%s-%s_CC' % (product, target)] = '%s/usr/bin/clang' % osx_toolchain
+            env['_%s-%s_CXX' % (product, target)] = '%s/usr/bin/clang++' % osx_toolchain
+
+            osx_sysroot = '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk'
+
+            CFLAGS = [
+                '-isysroot', osx_sysroot,
+                '-arch', target_arch[target_platform][target]
+            ]
+
+            env['_%s-%s_CFLAGS' % (product, target)] = CFLAGS
+            env['_%s-%s_CXXFLAGS' % (product, target)] = CFLAGS
 
     env['_%s-%s_CONFIGURE_FLAGS' % (product, target)] = CONFIGURE_FLAGS
 
@@ -187,6 +211,14 @@ def configure(opts: DesktopOpts, product: str, target_platform: str, target: str
 def make(opts: DesktopOpts, product: str, target_platform: str, target: str):
     build_dir = path_join(opts.configure_dir, '%s-%s-%s' % (product, target, opts.configuration))
 
+    if target_platform == 'windows':
+        mxe = 'mxe-Win64' if target == 'x86_64' else 'mxe-Win32'
+        replace_in_new_file(
+            src_file='%s/sdks/builds/%s.cmake.in' % (opts.mono_source_root, mxe),
+            search='@MXE_PATH@', replace=opts.mxe_prefix,
+            dst_file='%s/mono/btls/%s.cmake' % (opts.mono_source_root, mxe)
+        )
+
     make_args = make_default_args(opts)
     make_args += ['-C', build_dir]
 
@@ -202,7 +234,7 @@ def copy_bcl(opts: DesktopOpts, product: str, target_platform: str, target: str)
     from distutils.dir_util import copy_tree
     from bcl import get_profile_install_dirs
     dest_dir = path_join(opts.install_dir, '%s-%s-%s' % (product, target, opts.configuration), 'lib/mono/4.5')
-    for src_dir in get_profile_install_dirs(opts, 'desktop'):
+    for src_dir in get_profile_install_dirs(opts, 'desktop-win32' if target_platform == 'windows' else 'desktop'):
         if not os.path.isdir(src_dir):
             raise BuildError('BCL source directory does not exist: %s. The BCL must be built prior to this.' % src_dir)
         copy_tree(src_dir, dest_dir)

@@ -9,9 +9,9 @@ This repository contains scripts for building the Mono runtime to use with Godot
 The scripts are tested against specific versions of the toolchains used by Godot.
 While they may work with other versions, you might have issues applying patches or compiling, so we recommend using the versions below.
 
-- Mono: 6.12.0.122.
+- Mono: 6.12.0.179.
 - Emscripten: 1.39.9.
-- Android: API level 29.
+- Android: API level 30.
 
 ## Command-line options
 
@@ -36,7 +36,7 @@ export MONO_SOURCE_ROOT=$HOME/git/mono
 
 ### Notes
 - Python 3.7 or higher is required.
-- OSXCROSS is supported expect for building the Mono cross-compilers.
+- OSXCROSS is supported except for building the Mono cross-compilers.
 - Building on Windows is not supported. It's possible to use Cygwin or WSL (Windows Subsystem for Linux) but this hasn't been tested.
 
 ## Compiling Godot for Desktop with this Runtime

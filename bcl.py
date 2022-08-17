@@ -40,7 +40,7 @@ def get_profile_install_dirs(opts: BaseOpts, product: str):
     profiles = profiles_table[product]
     return [path_join(install_dir, get_profile_dir(profile, product)) for profile in profiles]
 
-def configure_bcl(opts: BclOpts):
+def configure_bcl(opts: BclOpts, product: str):
     stamp_file = path_join(opts.configure_dir, '.stamp-bcl-configure')
 
     if os.path.isfile(stamp_file):
@@ -54,11 +54,20 @@ def configure_bcl(opts: BclOpts):
 
     CONFIGURE_FLAGS = [
         '--disable-boehm',
-        '--disable-btls-lib',
         '--disable-nls',
         '--disable-support-build',
         '--with-mcs-docs=no'
     ]
+
+    if product == 'desktop-win32':
+        CONFIGURE_FLAGS += [
+            '--enable-btls',
+            '--enable-btls-lib'
+        ]
+    else:
+        CONFIGURE_FLAGS += [
+            '--disable-btls-lib'
+        ]
 
     configure = path_join(opts.mono_source_root, 'configure')
     configure_args = CONFIGURE_FLAGS
@@ -84,8 +93,8 @@ def make_bcl(opts: BclOpts):
     touch(stamp_file)
 
 
-def build_bcl(opts: BclOpts):
-    configure_bcl(opts)
+def build_bcl(opts: BclOpts, product: str):
+    configure_bcl(opts, product)
     make_bcl(opts)
 
 
@@ -97,7 +106,7 @@ def clean_bcl(opts: BclOpts):
 
 
 def make_product(opts: BclOpts, product: str):
-    build_bcl(opts)
+    build_bcl(opts, product)
 
     build_dir = path_join(opts.configure_dir, 'bcl')
 
@@ -175,6 +184,25 @@ def make_product(opts: BclOpts, product: str):
             '-nostdlib', '-noconfig', '-langversion:latest'
         ]
         android_env_csc_args += ['-r:%s' % path_join(monodroid_profile_dir, r) for r in refs]
+
+        run_command('csc', android_env_csc_args)
+
+    # (custom 'Xamarin.iOS.dll')
+    if product == 'ios':
+        this_script_dir = os.path.dirname(os.path.realpath(__file__))
+        monotouch_profile_dir = '%s/%s' % (install_dir, 'monotouch')
+        refs = ['mscorlib.dll', 'System.Net.Http.dll']
+
+        mkdir_p(monotouch_profile_dir)
+
+        android_env_csc_args = [
+            path_join(this_script_dir, 'files', 'xi.cs'),
+            '-keyfile:' + path_join(this_script_dir, 'files', 'xi.snk'),
+            '-out:%s' % path_join(monotouch_profile_dir, 'Xamarin.iOS.dll'),
+            '-optimize', '-deterministic', '-publicsign', '-target:library',
+            '-nostdlib', '-noconfig', '-langversion:latest'
+        ]
+        android_env_csc_args += ['-r:%s' % path_join(monotouch_profile_dir, r) for r in refs]
 
         run_command('csc', android_env_csc_args)
 

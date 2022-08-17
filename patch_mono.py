@@ -27,6 +27,7 @@ def main(raw_args):
 
     patches = [
         'fix-mono-android-tkill.diff',
+        'fix-mono-log-spam.diff',
         'mono-dbg-agent-clear-tls-instead-of-abort.diff',
         'bcl-profile-platform-override.diff',
         'mono_ios_asl_log_deprecated.diff',
@@ -37,6 +38,7 @@ def main(raw_args):
         'add-mono-fm-utils.diff',
         'mono_thread_signal_change.diff',
         'log-mono-image-ref-unload.diff',
+        'btls-cmake-args-linux-mingw.diff',
     ]
 
     if os.path.isfile(os.path.join(mono_source_root, 'mono/tools/offsets-tool/offsets-tool.py')):
