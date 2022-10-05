@@ -70,7 +70,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -79,7 +79,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -144,7 +144,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -153,7 +153,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -208,7 +208,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -217,7 +217,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -272,7 +272,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -281,7 +281,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -342,7 +342,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -351,7 +351,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -441,7 +441,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -450,7 +450,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -572,7 +572,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -581,7 +581,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -659,7 +659,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -668,7 +668,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -755,7 +755,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true' && steps.cache_llvm.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -766,7 +766,7 @@ jobs:
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
         if: steps.cache_llvm.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
@@ -819,7 +819,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
       - name: Checkout Mono Sources
         if: steps.cache_mono_sources.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: mono/mono
           ref: ${{ env.MONO_TAG }}
@@ -828,7 +828,7 @@ jobs:
       - name: Clean Mono
         run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: godot-mono-builds
       - name: Setup Python
