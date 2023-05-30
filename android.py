@@ -86,7 +86,7 @@ class AndroidTargetTable:
 def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
     extra_target_envs = {
         'armeabi-v7a': {
-            'android-armeabi-v7a_CFLAGS': ['-D__POSIX_VISIBLE=201002', '-DSK_RELEASE', '-DNDEBUG', '-UDEBUG', '-fpic', '-march=armv7-a', '-mtune=cortex-a8', '-mfpu=vfp', '-mfloat-abi=softfp'],
+            'android-armeabi-v7a_CFLAGS': ['-D__POSIX_VISIBLE=201002', '-DSK_RELEASE', '-DNDEBUG', '-UDEBUG', '-fpic', '-march=armv7-a', '-mtune=cortex-a8', '-mfpu=vfp', '-mfloat-abi=softfp', '-marm'],
             'android-armeabi-v7a_CXXFLAGS': ['-D__POSIX_VISIBLE=201002', '-DSK_RELEASE', '-DNDEBUG', '-UDEBUG', '-fpic', '-march=armv7-a', '-mtune=cortex-a8', '-mfpu=vfp', '-mfloat-abi=softfp'],
             'android-armeabi-v7a_LDFLAGS': ['-Wl,--fix-cortex-a8']
         },
