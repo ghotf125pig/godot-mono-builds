@@ -444,7 +444,8 @@ jobs:
         run: |
           sudo snap install androidsdk
           yes | androidsdk --licenses
-          androidsdk "platforms;${ANDROID_PLATFORM}"
+          androidsdk --verbose --update
+          androidsdk --verbose "platforms;${ANDROID_PLATFORM}"
           androidsdk "ndk;${ANDROID_NDK_VERSION}"
           androidsdk "cmake;${ANDROID_CMAKE_VERSION}"
           echo "ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/" >> $GITHUB_ENV
