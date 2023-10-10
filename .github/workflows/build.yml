@@ -439,14 +439,12 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get -y install git autoconf libtool libtool-bin automake build-essential gettext cmake python3 curl
-          sudo apt-get -y install snapd
       - name: Install Android SDK Manager
         run: |
-          sudo snap install androidsdk
-          androidsdk --verbose --no_https --update
-          androidsdk --verbose --no_https "platforms;${ANDROID_PLATFORM}"
-          androidsdk "ndk;${ANDROID_NDK_VERSION}"
-          androidsdk "cmake;${ANDROID_CMAKE_VERSION}"
+          sdkmanager --verbose --no_https --update
+          sdkmanager --verbose --no_https "platforms;${ANDROID_PLATFORM}"
+          sdkmanager "ndk;${ANDROID_NDK_VERSION}"
+          sdkmanager "cmake;${ANDROID_CMAKE_VERSION}"
           echo "ANDROID_SDK_ROOT=$HOME/snap/androidsdk/current/" >> $GITHUB_ENV
           echo "ANDROID_NDK_ROOT=$HOME/AndroidSDK/ndk/$ANDROID_NDK_VERSION" >> $GITHUB_ENV
       - name: Cache Mono Sources
