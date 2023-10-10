@@ -26,20 +26,20 @@ def main(raw_args):
     mono_source_root = args.mono_sources
 
     patches = [
-        'fix-mono-android-tkill.diff',
-        'fix-mono-log-spam.diff',
-        'mono-dbg-agent-clear-tls-instead-of-abort.diff',
-        'bcl-profile-platform-override.diff',
-        'mono_ios_asl_log_deprecated.diff',
-        'wasm_m2n_trampolines_hook.diff',
-        'mono_osx_threads_helper_unity.diff',
-        'mini_runtime_remove_interp_error.diff',
-        'mono_transform_error_leak.diff',
-        'add-mono-fm-utils.diff',
-        'mono_thread_signal_change.diff',
-        'log-mono-image-ref-unload.diff',
-        'btls-cmake-args-linux-mingw.diff',
-        'btls-cmake-arm64.diff',
+        # 'fix-mono-android-tkill.diff',
+        # 'fix-mono-log-spam.diff',
+        # 'mono-dbg-agent-clear-tls-instead-of-abort.diff',
+        # 'bcl-profile-platform-override.diff',
+        # 'mono_ios_asl_log_deprecated.diff',
+        # 'wasm_m2n_trampolines_hook.diff',
+        # 'mono_osx_threads_helper_unity.diff',
+        # 'mini_runtime_remove_interp_error.diff',
+        # 'mono_transform_error_leak.diff',
+        # 'add-mono-fm-utils.diff',
+        # 'mono_thread_signal_change.diff',
+        # 'log-mono-image-ref-unload.diff',
+        # 'btls-cmake-args-linux-mingw.diff',
+        # 'btls-cmake-arm64.diff',
     ]
 
     if os.path.isfile(os.path.join(mono_source_root, 'mono/tools/offsets-tool/offsets-tool.py')):
