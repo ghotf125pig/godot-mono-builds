@@ -10,7 +10,7 @@ from os_utils import *
 import runtime
 
 
-DEFAULT_NDK_VERSION = '19.0.5232133'
+DEFAULT_NDK_VERSION = '23.2.8568313'
 DEFAULT_CMAKE_VERSION = '3.10.2.4988404'
 targets = ['armv7', 'arm64v8', 'x86', 'x86_64']
 
