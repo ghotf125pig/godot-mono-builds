@@ -1,5 +1,5 @@
 diff --git a/mono/mini/interp/transform.c b/mono/mini/interp/transform.c
-index 7438255c6a1..e258ba01723 100644
+index de7725aa8cc..df080476585 100644
 --- a/mono/mini/interp/transform.c
 +++ b/mono/mini/interp/transform.c
 @@ -739,8 +739,16 @@ mono_interp_jit_call_supported (MonoMethod *method, MonoMethodSignature *sig)

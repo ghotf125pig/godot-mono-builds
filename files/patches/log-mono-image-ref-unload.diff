@@ -1,8 +1,8 @@
 diff --git a/mono/metadata/image.c b/mono/metadata/image.c
-index b2ee484acdd..62c9a1909f7 100644
+index e0b86dd3d09..d36faf953aa 100644
 --- a/mono/metadata/image.c
 +++ b/mono/metadata/image.c
-@@ -1471,6 +1471,8 @@ mono_image_storage_dtor (gpointer self)
+@@ -1477,6 +1477,8 @@ mono_image_storage_dtor (gpointer self)
  {
  	MonoImageStorage *storage = (MonoImageStorage *)self;
  
@@ -11,7 +11,7 @@ index b2ee484acdd..62c9a1909f7 100644
  	mono_image_storage_unpublish (storage);
  	
  #ifdef HOST_WIN32
-@@ -1492,6 +1494,7 @@ mono_image_storage_dtor (gpointer self)
+@@ -1498,6 +1500,7 @@ mono_image_storage_dtor (gpointer self)
  		}
  	}
  	if (storage->raw_data_allocated) {
@@ -19,7 +19,7 @@ index b2ee484acdd..62c9a1909f7 100644
  		g_free (storage->raw_data);
  	}
  
-@@ -2362,15 +2365,28 @@ mono_image_close_except_pools (MonoImage *image)
+@@ -2368,15 +2371,28 @@ mono_image_close_except_pools (MonoImage *image)
  	 * assemblies, so we can't release these references in mono_assembly_close () since the
  	 * MonoImage might outlive its associated MonoAssembly.
  	 */
@@ -48,7 +48,7 @@ index b2ee484acdd..62c9a1909f7 100644
  			g_free (image->references);
  			image->references = NULL;
  		}
-@@ -2396,7 +2412,10 @@ mono_image_close_except_pools (MonoImage *image)
+@@ -2402,7 +2418,10 @@ mono_image_close_except_pools (MonoImage *image)
  	}
  
  	if (image->storage)
@@ -59,7 +59,7 @@ index b2ee484acdd..62c9a1909f7 100644
  
  	if (debug_assembly_unload) {
  		char *old_name = image->name;
-@@ -2520,6 +2539,7 @@ mono_image_close_finish (MonoImage *image)
+@@ -2526,6 +2545,7 @@ mono_image_close_finish (MonoImage *image)
  				mono_assembly_close_finish (image->references [i]);
  		}
  

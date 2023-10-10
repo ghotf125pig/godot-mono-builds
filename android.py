@@ -10,8 +10,8 @@ from os_utils import *
 import runtime
 
 
-DEFAULT_NDK_VERSION = '23.2.8568313'
-DEFAULT_CMAKE_VERSION = '3.18.1'
+DEFAULT_NDK_VERSION = '19.0.5232133'
+DEFAULT_CMAKE_VERSION = '3.10.2.4988404'
 targets = ['armv7', 'arm64v8', 'x86', 'x86_64']
 
 
@@ -102,7 +102,7 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
             host_subpath = "windows"
 
     cmake_path = os.path.join(opts.android_sdk_root, 'cmake', opts.android_cmake_version, 'bin')
-    ndk_path = os.path.join(opts.android_sdk_root, 'ndk', opts.android_ndk_version)
+    ndk_path = os.environ.get("ANDROID_NDK_ROOT", os.path.join(opts.android_sdk_root, 'ndk', opts.android_ndk_version))
     toolchain_path = os.path.join(ndk_path, 'toolchains/llvm/prebuilt', host_subpath)
     compiler_path = os.path.join(toolchain_path, 'bin')
     compiler_wrapper = target_triple + env['ANDROID_API_VERSION'] + '-'
