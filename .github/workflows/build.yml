@@ -501,7 +501,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target: [runtime, runtime-threads]
+        target: [runtime]
     steps:
       - name: Set Environment Variables
         run: |
