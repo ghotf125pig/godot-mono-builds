@@ -19,9 +19,9 @@ def get_min_api_version(target) -> str:
     # Minimum API version should be in sync with Godot's platform/android/detect.py.
     # Note: The minimum API version for arm64v8 and x86_64 is '21'
     min_versions = {
-        'armv7': '19',
+        'armv7': '21',
         'arm64v8': '21',
-        'x86': '19',
+        'x86': '21',
         'x86_64': '21',
     }
     return min_versions[target]
