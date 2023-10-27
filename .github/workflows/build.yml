@@ -470,7 +470,8 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       - name: Patch Mono
-        run:
+        run: |
+          ls ${{ env.MONO_SOURCE_ROOT }}/external/bdwgc
           python3 godot-mono-builds/patch_mono.py
       - name: Configure
         run:
