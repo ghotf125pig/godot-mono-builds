@@ -166,7 +166,7 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
     LDFLAGS += ['-Wl,--hash-style=both']
 
     CONFIGURE_FLAGS = [
-        '--with-sgen=no',
+        '--with-sgen=yes',
         '--with-libgc=included',
         '--disable-executables',
         '--disable-iconv',
