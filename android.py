@@ -168,6 +168,7 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
     CONFIGURE_FLAGS = [
         '--with-sgen=yes',
         '--with-libgc=included',
+        '--with-libatomic-ops=no',
         '--disable-executables',
         '--disable-iconv',
         '--disable-mcs-build',
