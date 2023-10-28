@@ -166,7 +166,7 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
     LDFLAGS += ['-Wl,--hash-style=both']
 
     CONFIGURE_FLAGS = [
-        '--with-sgen=yes',
+        '--with-sgen=no',
         '--with-libgc=included',
         '--with-libatomic-ops=none',
         '--disable-executables',
@@ -175,8 +175,9 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
         '--disable-nls',
         '--enable-dynamic-btls',
         '--enable-maintainer-mode',
-        '--enable-minimal=ssa,portability,attach,verifier,full_messages'
-                ',logging,security,shared_handles,interpreter',
+        '--enable-minimal=ssa,portability,attach,verifier,full_messages,sgen_remset'
+                ',sgen_marksweep_par,sgen_marksweep_fixed,sgen_marksweep_fixed_par'
+                ',sgen_copying,logging,security,shared_handles,interpreter',
         '--with-btls-android-ndk=%s' % ndk_path,
         '--with-btls-android-api=%s' % android_api,
     ]
