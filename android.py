@@ -192,7 +192,14 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
         '--without-ikvm-native',
         '--disable-cooperative-suspend',
         '--disable-hybrid-suspend',
-        '--disable-crash-reporting'
+        '--disable-crash-reporting',
+        '--enable-verify-defines=yes',
+        '--enable-no-threads-discovery=yes',
+        '--enable-gc-threads=yes',
+        '--enable-ignore-dynamic-loading=yes',
+        '--enable-dont-register-main-static-data=yes',
+        '--enable-mmap=yes',
+        '--enable-munmap=6'
     ]
 
     env['_android-%s_AR' % target] = AR
