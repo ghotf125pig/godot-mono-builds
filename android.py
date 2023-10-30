@@ -148,7 +148,8 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
     CFLAGS += [
         '-fstack-protector',
         '-DMONODROID=1'
-        '-D__ANDROID_API__=' + android_api
+        '-D__ANDROID_API__=' + android_api,
+        '-DGC_ANDROID_LOG'
     ]
 
     CXXFLAGS += [
@@ -200,7 +201,8 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
         '--enable-dont-register-main-static-data=yes',
         '--enable-mmap=yes',
         '--enable-munmap=6',
-        '--enable-single-obj-compilation'
+        '--enable-single-obj-compilation',
+        '--enable-gc-debug'
     ]
 
     env['_android-%s_AR' % target] = AR
