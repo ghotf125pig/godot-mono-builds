@@ -198,7 +198,7 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
         '--enable-gc-threads=yes',
         '--enable-dont-register-main-static-data=yes',
         '--enable-mmap=yes',
-        '--enable-munmap=6'，
+        '--enable-munmap=6',
         '--enable-single-obj-compilation'
     ]
 
