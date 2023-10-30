@@ -199,8 +199,7 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
         '--enable-ignore-dynamic-loading=yes',
         '--enable-dont-register-main-static-data=yes',
         '--enable-mmap=yes',
-        '--enable-munmap=6',
-        '--enable-single-obj-compilation'
+        '--enable-munmap=6'
     ]
 
     env['_android-%s_AR' % target] = AR
