@@ -196,10 +196,7 @@ def setup_android_target_template(env: dict, opts: AndroidOpts, target: str):
         '--enable-verify-defines=yes',
         '--enable-no-threads-discovery=yes',
         '--enable-gc-threads=yes',
-        '--enable-ignore-dynamic-loading=yes',
-        '--enable-dont-register-main-static-data=yes',
-        '--enable-mmap=yes',
-        '--enable-munmap=6'
+        '--enable-ignore-dynamic-loading=yes'
     ]
 
     env['_android-%s_AR' % target] = AR
