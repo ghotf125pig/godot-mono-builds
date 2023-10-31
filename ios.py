@@ -134,7 +134,9 @@ def setup_ios_device_template(env: dict, opts: iOSOpts, target: str):
     ]
 
     CONFIGURE_FLAGS = [
-    	'--disable-boehm',
+        '--with-sgen=no',
+        '--with-libgc=included',
+        '--with-libatomic-ops=none',
     	'--disable-btls',
     	'--disable-executables',
     	'--disable-icall-tables',
@@ -156,7 +158,16 @@ def setup_ios_device_template(env: dict, opts: iOSOpts, target: str):
     	'--without-sigaltstack',
     	'--disable-cooperative-suspend',
     	'--disable-hybrid-suspend',
-    	'--disable-crash-reporting'
+    	'--disable-crash-reporting',
+        '--enable-verify-defines=yes',
+        '--enable-no-threads-discovery=yes',
+        '--enable-gc-threads=yes',
+        '--enable-ignore-dynamic-loading=yes',
+        '--enable-dont-register-main-static-data=yes',
+        '--enable-mmap=yes',
+        '--enable-munmap=6',
+        '--enable-single-obj-compilation',
+        '--disable-thread-local-alloc'
     ]
 
     env['_ios-%s_AR' % target] = AR
@@ -251,7 +262,9 @@ def setup_ios_simulator_template(env: dict, opts: iOSOpts, target: str):
     LDFLAGS = []
 
     CONFIGURE_FLAGS = [
-        '--disable-boehm',
+        '--with-sgen=no',
+        '--with-libgc=included',
+        '--with-libatomic-ops=none',
         '--disable-btls',
         '--disable-executables',
         '--disable-iconv',
@@ -265,7 +278,16 @@ def setup_ios_simulator_template(env: dict, opts: iOSOpts, target: str):
         '--without-ikvm-native',
         '--disable-cooperative-suspend',
         '--disable-hybrid-suspend',
-        '--disable-crash-reporting'
+        '--disable-crash-reporting',
+        '--enable-verify-defines=yes',
+        '--enable-no-threads-discovery=yes',
+        '--enable-gc-threads=yes',
+        '--enable-ignore-dynamic-loading=yes',
+        '--enable-dont-register-main-static-data=yes',
+        '--enable-mmap=yes',
+        '--enable-munmap=6',
+        '--enable-single-obj-compilation',
+        '--disable-thread-local-alloc'
     ]
 
     if sys.platform != 'darwin':
