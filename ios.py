@@ -166,7 +166,6 @@ def setup_ios_device_template(env: dict, opts: iOSOpts, target: str):
         '--enable-dont-register-main-static-data=yes',
         '--enable-mmap=yes',
         '--enable-munmap=6',
-        '--enable-single-obj-compilation',
         '--disable-thread-local-alloc'
     ]
 
@@ -286,7 +285,6 @@ def setup_ios_simulator_template(env: dict, opts: iOSOpts, target: str):
         '--enable-dont-register-main-static-data=yes',
         '--enable-mmap=yes',
         '--enable-munmap=6',
-        '--enable-single-obj-compilation',
         '--disable-thread-local-alloc'
     ]
 
@@ -438,7 +436,6 @@ def setup_ios_cross_template(env: dict, opts: iOSOpts, target: str, host_arch: s
         '--enable-dont-register-main-static-data=yes',
         '--enable-mmap=yes',
         '--enable-munmap=6',
-        '--enable-single-obj-compilation',
         '--disable-thread-local-alloc'
     ]
 
