@@ -151,8 +151,7 @@ def setup_ios_device_template(env: dict, opts: iOSOpts, target: str):
                 'full_messages,appdomains,security,sgen_remset,sgen_marksweep_par,sgen_marksweep_fixed,' +
                 'sgen_marksweep_fixed_par,sgen_copying,logging,remoting,shared_perfcounters,gac',
     	'--enable-monotouch',
-		# We don't need this. Comment it so we don't have to call 'mono_gc_init_finalizer_thread' from Godot.
-    	#'--with-lazy-gc-thread-creation=yes',
+    	'--with-lazy-gc-thread-creation=yes',
     	'--with-tls=pthread',
     	'--without-ikvm-native',
     	'--without-sigaltstack',
@@ -419,8 +418,7 @@ def setup_ios_cross_template(env: dict, opts: iOSOpts, target: str, host_arch: s
 
     CONFIGURE_FLAGS = [
         '--with-sgen=no',
-        '--with-libgc=included',
-        '--with-libatomic-ops=none',
+        '--disable-boehm',
         '--disable-btls',
         '--disable-iconv',
         '--disable-libraries',
@@ -430,16 +428,7 @@ def setup_ios_cross_template(env: dict, opts: iOSOpts, target: str, host_arch: s
         '--enable-icall-symbol-map',
         '--enable-minimal=com,remoting',
         '--enable-monotouch',
-        '--disable-crash-reporting',
-        '--enable-verify-defines=yes',
-        '--enable-no-threads-discovery=yes',
-        '--enable-gc-threads=yes',
-        '--enable-ignore-dynamic-loading=yes',
-        '--enable-dont-register-main-static-data=yes',
-        '--enable-mmap=yes',
-        '--enable-munmap=6',
-        '--enable-single-obj-compilation',
-        '--disable-thread-local-alloc'
+        '--disable-crash-reporting'
     ]
 
     env['_ios-%s_AC_VARS' % target] = AC_VARS
