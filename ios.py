@@ -417,7 +417,6 @@ def setup_ios_cross_template(env: dict, opts: iOSOpts, target: str, host_arch: s
     LDFLAGS = ['-stdlib=libc++']
 
     CONFIGURE_FLAGS = [
-        '--with-sgen=no',
         '--disable-boehm',
         '--disable-btls',
         '--disable-iconv',
