@@ -417,7 +417,9 @@ def setup_ios_cross_template(env: dict, opts: iOSOpts, target: str, host_arch: s
     LDFLAGS = ['-stdlib=libc++']
 
     CONFIGURE_FLAGS = [
-        '--disable-boehm',
+        '--with-sgen=no',
+        '--with-libgc=included',
+        '--with-libatomic-ops=none',
         '--disable-btls',
         '--disable-iconv',
         '--disable-libraries',
@@ -427,7 +429,16 @@ def setup_ios_cross_template(env: dict, opts: iOSOpts, target: str, host_arch: s
         '--enable-icall-symbol-map',
         '--enable-minimal=com,remoting',
         '--enable-monotouch',
-        '--disable-crash-reporting'
+        '--disable-crash-reporting',
+        '--enable-verify-defines=yes',
+        '--enable-no-threads-discovery=yes',
+        '--enable-gc-threads=yes',
+        '--enable-ignore-dynamic-loading=yes',
+        '--enable-dont-register-main-static-data=yes',
+        '--enable-mmap=yes',
+        '--enable-munmap=6',
+        '--enable-single-obj-compilation',
+        '--disable-thread-local-alloc'
     ]
 
     env['_ios-%s_AC_VARS' % target] = AC_VARS
