@@ -53,21 +53,10 @@ def configure_bcl(opts: BclOpts, product: str):
     mkdir_p(build_dir)
 
     CONFIGURE_FLAGS = [
-        '--with-sgen=no',
-        '--with-libgc=included',
-        '--with-libatomic-ops=none',
+        '--disable-boehm',
         '--disable-nls',
         '--disable-support-build',
-        '--with-mcs-docs=no',
-        '--enable-verify-defines=yes',
-        '--enable-no-threads-discovery=yes',
-        '--enable-gc-threads=yes',
-        '--enable-ignore-dynamic-loading=yes',
-        '--enable-dont-register-main-static-data=yes',
-        '--enable-mmap=yes',
-        '--enable-munmap=6',
-        '--enable-single-obj-compilation',
-        '--disable-thread-local-alloc'
+        '--with-mcs-docs=no'
     ]
 
     if product == 'desktop-win32':
