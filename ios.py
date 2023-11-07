@@ -151,7 +151,7 @@ def setup_ios_device_template(env: dict, opts: iOSOpts, target: str):
                 'full_messages,appdomains,security,sgen_remset,sgen_marksweep_par,sgen_marksweep_fixed,' +
                 'sgen_marksweep_fixed_par,sgen_copying,logging,remoting,shared_perfcounters,gac',
     	'--enable-monotouch',
-    	#'--with-lazy-gc-thread-creation=yes',
+    	'--with-lazy-gc-thread-creation=yes',
     	'--with-tls=pthread',
     	'--without-ikvm-native',
     	'--without-sigaltstack',
